@@ -30,7 +30,7 @@ const updateExchangeRate = async () => {
   if (amtVal === "" || amtVal < 1) {
     amtVal = 1;
   }
-  const API_KEY = "f0a1a948da2472e27bf96b24";
+  const API_KEY = "-- API KEY --";
   const URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${fromCurr.value}/${toCurr.value}`;
   let response = await fetch(URL);
   let data = await response.json();
