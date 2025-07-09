@@ -1,6 +1,3 @@
-// const BASE_URL =
-//   "https://v6.exchangerate-api.com/v6/f0a1a948da2472e27bf96b24/pair/";
-
 const dropdowns = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
@@ -36,14 +33,12 @@ const updateExchangeRate = async () => {
   let data = await response.json();
   let rate = data.conversion_rate;
 
-  let finalamount = amtVal * rate;
-  console.log(finalamount);
+  let finalamount = (amtVal * rate).toFixed(2);
   msg.innerText = `${amtVal} ${fromCurr.value} = ${finalamount} ${toCurr.value}`;
 };
 
 const updateFlag = (element) => {
   let currCode = element.value;
-  console.log(currCode);
   let countryCode = countryList[currCode];
   let newSrc = `https://flagsapi.com/${countryCode}/flat/64.png`;
   let img = element.parentElement.querySelector("img");
