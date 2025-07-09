@@ -1,3 +1,6 @@
+// const BASE_URL =
+//   "https://v6.exchangerate-api.com/v6/f0a1a948da2472e27bf96b24/pair/";
+
 const dropdowns = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
@@ -27,11 +30,18 @@ const updateExchangeRate = async () => {
   if (amtVal === "" || amtVal < 1) {
     amtVal = 1;
   }
+  amtVal = parseFloat(amtVal); // Ensure amtVal is a number
+
   const API_KEY = "f0a1a948da2472e27bf96b24";
   const URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair/${fromCurr.value}/${toCurr.value}`;
   let response = await fetch(URL);
   let data = await response.json();
   let rate = data.conversion_rate;
+
+  if (!rate || isNaN(rate)) {
+    msg.innerText = "Exchange rate not available.";
+    return;
+  }
 
   let finalamount = (amtVal * rate).toFixed(2);
   msg.innerText = `${amtVal} ${fromCurr.value} = ${finalamount} ${toCurr.value}`;
